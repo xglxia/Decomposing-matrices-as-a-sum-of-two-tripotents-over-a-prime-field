@@ -92,7 +92,7 @@ def list_even_splitor(list_split, n):
             #print('res is:', res)
             
     return res
-#print(list_even_splitor([1,1,1,1], 2))            
+           
 
 
 
@@ -115,27 +115,18 @@ def tripotent_generator(n,p):
                         comparsion = (b.dot(a))%p == a
                         if comparsion.all() == True:
                             lst.append(a)
-                        #lst.append(np.array([a11,a12,a21,a22]).reshape(2,2))
-                       # print(np.array([a11,a12,a21,a22]).reshape(2,2))
-                        #print('\n')
+                       
                         
         return lst
     elif n > 2:
         for a11 in tripotent_generator(1, p):
-            #print('a11 is:', a11)
             for list_ele in list_generator(2*n-2, p):
-                #print('list_ele is:', list_ele)
                 for splited_list in list_even_splitor(list_ele, n-1):
-                    #print('splited_list is:', splited_list)
                     for A in tripotent_generator(n-1, p):
                         A = np.insert(A, 0, splited_list, axis = 0)#row insert
-                        #print('A after row insert:', A)
-                        #A = np.vstack([A, splited_list])
-                        #A[[0,n-1]] = A[[n-1, 0]]
                         for splited_list in list_even_splitor(list_ele, n-1):
                             for a11 in tripotent_generator(1, p):
                                 a = np.insert(A, 0, a11+splited_list, axis = 1)#column insert for A
-                                #print('A after column insert:',a )
                                 b = (a.dot(a))%p
                                 comparsion = (b.dot(a))%p == a
                                 if comparsion.all() == True:
@@ -144,8 +135,6 @@ def tripotent_generator(n,p):
 
 
     Lst = {array.tobytes(): array for array in lst}
-
-
     return list(Lst.values())
                     
                  
